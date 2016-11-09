@@ -1,0 +1,284 @@
+TMYSDLtest
+v6
+r1
+cCheck dependencies
+cCompileC DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_sprites.o /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_sprites.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_animate.o /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_animate.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_tilebg.o /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_tilebg.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+cLibtool /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Products/Debug/libMYSDLtest.a normal x86_64
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk
+c000000005347232500000000000000AA
+t1397170981
+s170
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/SDKSettings.plist
+c00000000526717DA000000000000044C
+t1382488026
+s1100
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/CoreServices/SystemVersion.plist
+c00000000531F047700000000000001DE
+t1394541687
+s478
+
+N/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/5.1/include/module.map
+c00000000531F04790000000000000ADC
+t1394541689
+s2780
+
+N/Library/Frameworks/SDL2.framework/SDL2
+c000000005299685A000000000017C6A0
+t1385785434
+s1558176
+
+N/Library/Frameworks/SDL2_image.framework/SDL2_image
+c0000000052067AC60000000000028E40
+t1376156358
+s167488
+
+N/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/MYSDLtest.LinkFileList
+c0000000053E305B000000000000001EB
+t1407387056
+s491
+
+N/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_animate.o
+t1407387056
+s8252
+
+N/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_sprites.o
+t1407387056
+s12564
+
+N/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_tilebg.o
+t1407387056
+s13340
+
+N/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Products/Debug/libMYSDLtest.a
+t2
+s0
+
+N/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_animate.c
+c0000000053345EDF0000000000001CFE
+t1395941087
+s7422
+
+N/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_sprites.c
+c000000005334C885000000000000210E
+t1395968133
+s8462
+
+N/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_tilebg.c
+c0000000053A111BA0000000000001C97
+t1403064762
+s7319
+
+CBuild AST from /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_animate.c
+r0
+
+CBuild AST from /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_sprites.c
+r0
+
+CBuild AST from /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_tilebg.c
+r0
+
+CCheck dependencies
+r0
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependencies3a0200303d93b941^2bf603303d93b941^---0#1#1#--18"Check dependencies36"DAFF9CDF-2793-48F2-B1D5-9DA47A8FD745-
+
+CCompileC DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_animate.o /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_animate.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+s429079856.016220
+e429079856.168188
+r1
+xCompileC
+xDerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_animate.o
+x/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_animate.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_animate.c
+d/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/include/mysdl_animate.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_main.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_stdinc.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_config.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_platform.h
+d/Library/Frameworks/SDL2.framework/Headers/begin_code.h
+d/Library/Frameworks/SDL2.framework/Headers/close_code.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_config_macosx.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_assert.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_atomic.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_audio.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_error.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_endian.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_mutex.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_thread.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_rwops.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_clipboard.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_cpuinfo.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_events.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_video.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_pixels.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_rect.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_surface.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_blendmode.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_keyboard.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_keycode.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_scancode.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_mouse.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_joystick.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_gamecontroller.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_quit.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_gesture.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_touch.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_filesystem.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_haptic.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_hints.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_loadso.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_log.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_messagebox.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_power.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_render.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_system.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_timer.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_version.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compile /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_animate.c198"CompileC DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_animate.o souce/mysdl_animate.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler3a4004303d93b941^170f2b303d93b941^---0#0#1#-19%DVTDocumentLocation2@84"file:///Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_animate.c0000000000000000^3264"CompileC DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_animate.o souce/mysdl_animate.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib    export LANG=en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fmodules -fmodules-cache-path=/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wconditional-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -mmacosx-version-min=10.9 -g -Wno-sign-conversion -iquote /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/MYSDLtest-generated-files.hmap -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/MYSDLtest-own-target-headers.hmap -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/MYSDLtest-all-target-headers.hmap -iquote /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/MYSDLtest-project-headers.hmap -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Products/Debug/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/DerivedSources/x86_64 -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/DerivedSources -F/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Products/Debug -F/Library/Frameworks -MMD -MT dependencies -MF /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_animate.d --serialize-diagnostics /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_animate.dia -c /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_animate.c -o /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_animate.o36"8961B819-D2EB-4964-A54B-EA491C773F36-
+bE932E443-34DA-4382-A628-79B4280C311A
+
+CCompileC DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_sprites.o /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_sprites.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+s429079856.015986
+e429079856.172607
+r1
+xCompileC
+xDerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_sprites.o
+x/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_sprites.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_sprites.c
+d/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/include/mysdl_sprites.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_main.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_stdinc.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_config.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_platform.h
+d/Library/Frameworks/SDL2.framework/Headers/begin_code.h
+d/Library/Frameworks/SDL2.framework/Headers/close_code.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_config_macosx.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_assert.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_atomic.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_audio.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_error.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_endian.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_mutex.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_thread.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_rwops.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_clipboard.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_cpuinfo.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_events.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_video.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_pixels.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_rect.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_surface.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_blendmode.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_keyboard.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_keycode.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_scancode.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_mouse.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_joystick.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_gamecontroller.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_quit.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_gesture.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_touch.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_filesystem.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_haptic.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_hints.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_loadso.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_log.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_messagebox.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_power.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_render.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_system.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_timer.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_version.h
+d/Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h
+d/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/include/mysdl_animate.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compile /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_sprites.c198"CompileC DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_sprites.o souce/mysdl_sprites.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler0a3004303d93b941^6e302c303d93b941^---0#0#1#-19%DVTDocumentLocation2@84"file:///Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_sprites.c0000000000000000^3264"CompileC DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_sprites.o souce/mysdl_sprites.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib    export LANG=en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fmodules -fmodules-cache-path=/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wconditional-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -mmacosx-version-min=10.9 -g -Wno-sign-conversion -iquote /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/MYSDLtest-generated-files.hmap -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/MYSDLtest-own-target-headers.hmap -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/MYSDLtest-all-target-headers.hmap -iquote /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/MYSDLtest-project-headers.hmap -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Products/Debug/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/DerivedSources/x86_64 -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/DerivedSources -F/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Products/Debug -F/Library/Frameworks -MMD -MT dependencies -MF /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_sprites.d --serialize-diagnostics /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_sprites.dia -c /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_sprites.c -o /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_sprites.o36"03F6B269-0D3E-45EC-9C16-0DE1622F11DD-
+bE932E443-34DA-4382-A628-79B4280C311A
+
+CCompileC DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_tilebg.o /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_tilebg.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+s429079856.016675
+e429079856.169966
+r1
+xCompileC
+xDerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_tilebg.o
+x/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_tilebg.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_tilebg.c
+d/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/include/mysdl_tilebg.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_main.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_stdinc.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_config.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_platform.h
+d/Library/Frameworks/SDL2.framework/Headers/begin_code.h
+d/Library/Frameworks/SDL2.framework/Headers/close_code.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_config_macosx.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_assert.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_atomic.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_audio.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_error.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_endian.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_mutex.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_thread.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_rwops.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_clipboard.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_cpuinfo.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_events.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_video.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_pixels.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_rect.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_surface.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_blendmode.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_keyboard.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_keycode.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_scancode.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_mouse.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_joystick.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_gamecontroller.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_quit.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_gesture.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_touch.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_filesystem.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_haptic.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_hints.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_loadso.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_log.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_messagebox.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_power.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_render.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_system.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_timer.h
+d/Library/Frameworks/SDL2.framework/Headers/SDL_version.h
+d/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/include/mysdl_sprites.h
+d/Library/Frameworks/SDL2_image.framework/Headers/SDL_image.h
+d/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/include/mysdl_animate.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_tilebg.c196"CompileC DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_tilebg.o souce/mysdl_tilebg.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler685c04303d93b941^7b832b303d93b941^---0#0#1#-19%DVTDocumentLocation2@83"file:///Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_tilebg.c0000000000000000^3258"CompileC DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_tilebg.o souce/mysdl_tilebg.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib    export LANG=en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fmodules -fmodules-cache-path=/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wconditional-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -mmacosx-version-min=10.9 -g -Wno-sign-conversion -iquote /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/MYSDLtest-generated-files.hmap -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/MYSDLtest-own-target-headers.hmap -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/MYSDLtest-all-target-headers.hmap -iquote /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/MYSDLtest-project-headers.hmap -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Products/Debug/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/DerivedSources/x86_64 -I/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/DerivedSources -F/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Products/Debug -F/Library/Frameworks -MMD -MT dependencies -MF /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_tilebg.d --serialize-diagnostics /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_tilebg.dia -c /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/souce/mysdl_tilebg.c -o /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/mysdl_tilebg.o36"1A2559CA-8812-4BCE-A8A4-12AD54B33CED-
+bE932E443-34DA-4382-A628-79B4280C311A
+
+CLibtool /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Products/Debug/libMYSDLtest.a normal x86_64
+s429079856.173311
+e429079856.183967
+r1
+xLibtool
+x/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Products/Debug/libMYSDLtest.a
+xnormal
+xx86_64
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection69"Libtool DerivedData/Build/Products/Debug/libMYSDLtest.a normal x86_6469"Libtool DerivedData/Build/Products/Debug/libMYSDLtest.a normal x86_64336c2c303d93b941^3f192f303d93b941^---0#0#1#--827"Libtool DerivedData/Build/Products/Debug/libMYSDLtest.a normal x86_64    cd /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib    export MACOSX_DEPLOYMENT_TARGET=10.9    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool -static -arch_only x86_64 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -L/Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Products/Debug -filelist /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Intermediates/MYSDLtest.build/Debug/MYSDLtest.build/Objects-normal/x86_64/MYSDLtest.LinkFileList -framework SDL2_image -framework SDL2 -o /Users/Derrick/Documents/Programming/sdl2-test/MYSDLlib/DerivedData/Build/Products/Debug/libMYSDLtest.a36"590E8FFE-6D0E-47DB-BF3F-6E52464824E4-
+bE932E443-34DA-4382-A628-79B4280C311A
+
