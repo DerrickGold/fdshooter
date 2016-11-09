@@ -1,0 +1,47 @@
+SHELL				:= bash.exe
+GAMEDATA		:= gfx
+CFLAGS 			:= -std=gnu99 -O3 -Wall 
+CC 						:= gcc.exe
+LD 						:= $(CC)
+LDLIBS				:= -lm
+LDFLAGS			:= -g 
+BASEDIR			:= $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+OUTPUT			:= $(BASEDIR)/winbuild
+
+LIBDIRS				:= $(BASEDIR)/MYSDLlib/SDL/windows
+SDLDIR				:= $(LIBDIRS)/i686-w64-mingw32
+IMGDIR 				:= $(LIBDIRS)/SDL2_image-2.0.1/i686-w64-mingw32
+MIXER 				:= $(LIBDIRS)/SDL2_mixer-2.0.1/i686-w64-mingw32
+
+LIB_PATHS		:= -L$(BASEDIR)/MYSDLlib -L$(SDLDIR)/lib -L$(IMGDIR)/lib -L$(MIXER)/lib
+
+LDLIBS 				+= -lMYSDLtest -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer 
+LIBINCLUDES 	:=  -I $(SDLDIR)/include/SDL2 -I $(IMGDIR)/include/SDL2 -I $(MIXER)/include/SDL2 -I $(BASEDIR)/MYSDLlib/include
+CFLAGS			+= $(LIBINCLUDES)
+LDFLAGS			+= $(LIB_PATHS) $(LDLIBS)
+
+
+.PHONY: all clean
+
+all: fdshooter
+	
+fdshooter: fdshooter.o globals.o
+	#make output directory
+	mkdir -p $(OUTPUT)
+	#copy newest resources folder
+	cp -r $(GAMEDATA) $(OUTPUT)/$(GAMEDATA)
+	#get all the .dll's required by sdl
+	cp -r $(SDLDIR)/bin/*.dll $(OUTPUT)
+	cp -r $(IMGDIR)/bin/*.dll $(OUTPUT)
+	cp -r $(MIXER)/bin/*.dll $(OUTPUT)
+	
+	$(LD) $^ $(CFLAGS) $(LDFLAGS) -o $(OUTPUT)/$@
+	
+fdshooter.o: fdshooter.c globals.h
+globals.o: globals.c globals.h
+
+
+
+clean:
+	@echo clean ...
+	@rm -fr *.o $(OUTPUT)
