@@ -8,7 +8,7 @@ LIBNAME         := libMYSDLtest.a
 OUTPUT          := $(BASEDIR)/lib
 INCLUDE         := $(BASEDIR)/include
 
-CC              := gcc
+CC              := gcc -arch x86_64
 AR              := ar
 CFLAGS          := -std=gnu99 -O3 -Wall 
 
@@ -18,8 +18,10 @@ LIBSDL          := $(SDL_BASE_DIR)/SDL2-2.0.5/i686-w64-mingw32
 LIBSDL_IMG      := $(SDL_BASE_DIR)/SDL2_image-2.0.1/i686-w64-mingw32
 LIBSDL_MIX      := $(SDL_BASE_DIR)/SDL2_mixer-2.0.1/i686-w64-mingw32
 
-LIBINCLUDES     := -I $(INCLUDE) -I $(LIBSDL)/include/SDL2 -I $(LIBSDL_IMG)/include/SDL2 -I $(LIBSDL_MIX)/include/SDL2
-CFLAGS          += $(LIBINCLUDES) 
+FRAMEWORKS      := -F/Library/Frameworks -framework SDL2 -framework SDL2_image -framework Cocoa -framework Foundation
+LIBINCLUDES     := -I $(INCLUDE) -F/Library/Frameworks
+CFLAGS          += $(LIBINCLUDES)
+LDLIBS          := -lm
 
 
 .PHONY: all clean
@@ -35,7 +37,7 @@ mysdl_animate.o: mysdl_animate.c $(INCLUDE)/mysdl_animate.h
 mysdl_sprites.o: mysdl_sprites.c $(INCLUDE)/mysdl_sprites.h $(INCLUDE)/mysdl_animate.h $(INCLUDE)/mysdl_main.h
 mysdl_tilebg.o: mysdl_tilebg.c $(INCLUDE)/mysdl_tilebg.h $(INCLUDE)/mysdl_sprites.h $(INCLUDE)/mysdl_animate.h $(INCLUDE)/mysdl_main.h
 
+
 clean:
 	@echo clean ...
 	@rm -fr *.o $(OUTPUT)
-

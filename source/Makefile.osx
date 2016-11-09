@@ -9,26 +9,24 @@ SDL_BASE_DIR  := $(PROJ_ROOT)/SDL/windows
 
 GAMEDATA      := $(PROJ_ROOT)/GameResources
 CFLAGS        := -std=gnu99 -O3 -Wall 
-CC            := gcc
+CC            := clang -arch x86_64
 LD            := $(CC)
-LDLIBS        := -lm
+LDLIBS        := -lm -lobjc
 LDFLAGS       := -g 
 
-OUTPUT        :=  $(PROJ_ROOT)/winbuild
+OUTPUT        :=  $(PROJ_ROOT)/macosbuild
 
 #=================================================================
 # Include the required libraries
 #=================================================================
 MYSDL         := $(PROJ_ROOT)/MYSDLlib
-LIBSDL        := $(SDL_BASE_DIR)/SDL2-2.0.5/i686-w64-mingw32
-LIBSDL_IMG    := $(SDL_BASE_DIR)/SDL2_image-2.0.1/i686-w64-mingw32
-LIBSDL_MIX    := $(SDL_BASE_DIR)/SDL2_mixer-2.0.1/i686-w64-mingw32
-LIB_PATHS     := -L$(MYSDL)/lib -L$(LIBSDL)/lib -L$(LIBSDL_IMG)/lib -L$(LIBSDL_MIX)/lib
+LIB_PATHS     := -L$(MYSDL)/lib
 
-LDLIBS        += -lMYSDLtest -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer 
-LIBINCLUDES   := -I $(LIBSDL)/include/SDL2 -I $(LIBSDL_IMG)/include/SDL2 -I $(LIBSDL_MIX)/include/SDL2 -I $(MYSDL)/include
+LDLIBS        += -lMYSDLtest
+LIBINCLUDES   := -I $(MYSDL)/include -F/Library/Frameworks
+FRAMEWORKS    := -F/Library/Frameworks -framework SDL2 -framework SDL2_mixer -framework SDL2_image
 CFLAGS        += $(LIBINCLUDES)
-LDFLAGS       += $(LIB_PATHS) $(LDLIBS)
+LDFLAGS       += $(LIB_PATHS) $(LDLIBS) $(FRAMEWORKS)
 
 #=================================================================
 # Build Rules
@@ -43,9 +41,6 @@ fdshooter: fdshooter.o globals.o
 	@echo "============================================================="
 	@[ -d $(OUTPUT) ] || mkdir -p $(OUTPUT)
 	cp -r $(GAMEDATA) $(OUTPUT)
-	cp -r $(LIBSDL)/bin/*.dll $(OUTPUT)
-	cp -r $(LIBSDL_IMG)/bin/*.dll $(OUTPUT)
-	cp -r $(LIBSDL_MIX)/bin/*.dll $(OUTPUT)
 	@echo "============================================================="
 	@echo "Linking Binary...."
 	@echo "============================================================="
@@ -54,6 +49,9 @@ fdshooter: fdshooter.o globals.o
 fdshooter.o: fdshooter.c globals.h
 globals.o: globals.c globals.h
 
+
 clean:
 	@echo clean ...
 	@rm -fr *.o $(OUTPUT)
+
+
