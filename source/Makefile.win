@@ -1,0 +1,60 @@
+#=================================================================
+# Project Variables
+#=================================================================
+SHELL					:= bash
+BASEDIR				:= $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+PROJ_ROOT		:= $(BASEDIR)/..
+SDL_BASE_DIR	:= $(PROJ_ROOT)/SDL/windows
+
+
+GAMEDATA			:= $(PROJ_ROOT)/GameResources
+CFLAGS 				:= -std=gnu99 -O3 -Wall 
+CC 							:= gcc
+LD 							:= $(CC)
+LDLIBS					:= -lm
+LDFLAGS				:= -g 
+
+OUTPUT				:=  $(PROJ_ROOT)/winbuild
+
+#=================================================================
+# Include the required libraries
+#=================================================================
+MYSDL 					:= $(PROJ_ROOT)/MYSDLlib
+LIBSDL					:= $(SDL_BASE_DIR)/SDL2-2.0.5/i686-w64-mingw32
+LIBSDL_IMG 		:= $(SDL_BASE_DIR)/SDL2_image-2.0.1/i686-w64-mingw32
+LIBSDL_MIX 		:= $(SDL_BASE_DIR)/SDL2_mixer-2.0.1/i686-w64-mingw32
+LIB_PATHS			:= -L$(MYSDL)/lib -L$(LIBSDL)/lib -L$(LIBSDL_IMG)/lib -L$(LIBSDL_MIX)/lib
+
+LDLIBS 					+= -lMYSDLtest -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer 
+LIBINCLUDES 		:=  -I $(LIBSDL)/include/SDL2 -I $(LIBSDL_IMG)/include/SDL2 -I $(LIBSDL_MIX)/include/SDL2 -I $(MYSDL)/include
+CFLAGS				+= $(LIBINCLUDES)
+LDFLAGS				+= $(LIB_PATHS) $(LDLIBS)
+
+#=================================================================
+# Build Rules
+#=================================================================
+.PHONY: all clean
+
+all: fdshooter
+	
+fdshooter: fdshooter.o globals.o
+	@echo "============================================================="
+	@echo "Gathering game dependencies and resources"
+	@echo "============================================================="
+	mkdir -p $(OUTPUT)
+	cp -r $(GAMEDATA) $(OUTPUT)
+	cp -r $(LIBSDL)/bin/*.dll $(OUTPUT)
+	cp -r $(LIBSDL_IMG)/bin/*.dll $(OUTPUT)
+	cp -r $(LIBSDL_MIX)/bin/*.dll $(OUTPUT)
+	@echo "============================================================="
+	@echo "Linking Binary...."
+	@echo "============================================================="
+	$(LD) $^ $(CFLAGS) $(LDFLAGS) -o $(OUTPUT)/$@
+	
+fdshooter.o: fdshooter.c globals.h
+globals.o: globals.c globals.h
+
+
+clean:
+	@echo clean ...
+	@rm -fr *.o $(OUTPUT)

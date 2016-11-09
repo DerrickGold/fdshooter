@@ -1,0 +1,50 @@
+SHELL						:= bash
+BASEDIR					:= $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))/..
+PROJ_ROOT			:= $(BASEDIR)/..
+SDL_BASE_DIR		:= $(PROJ_ROOT)/SDL/windows
+
+
+LIBNAME					:= libMYSDLtest.a
+OUTPUT					:= $(BASEDIR)/lib
+INCLUDE					:= $(BASEDIR)/include
+
+CC 								:= gcc
+AR  								:= ar
+CFLAGS					:= -std=gnu99 -O3 -Wall 
+
+
+
+LIBSDL						:= $(SDL_BASE_DIR)/SDL2-2.0.5/i686-w64-mingw32
+LIBSDL_IMG 			:= $(SDL_BASE_DIR)/SDL2_image-2.0.1/i686-w64-mingw32
+LIBSDL_MIX 			:= $(SDL_BASE_DIR)/SDL2_mixer-2.0.1/i686-w64-mingw32
+
+LIBINCLUDES 			:= -I $(INCLUDE) -I $(LIBSDL)/include/SDL2 -I $(LIBSDL_IMG)/include/SDL2 -I $(LIBSDL_MIX)/include/SDL2
+CFLAGS					+= $(LIBINCLUDES) 
+
+
+.PHONY: all clean
+
+all: $(LIBNAME)
+
+$(LIBNAME): mysdl_main.o mysdl_animate.o mysdl_sprites.o mysdl_tilebg.o 
+	@mkdir -p $(OUTPUT)
+	$(AR) rcs $(OUTPUT)/$(LIBNAME) $^
+   
+mysdl_main.o: mysdl_main.c $(INCLUDE)/mysdl_main.h
+mysdl_animate.o: mysdl_animate.c $(INCLUDE)/mysdl_animate.h
+mysdl_sprites.o: mysdl_sprites.c $(INCLUDE)/mysdl_sprites.h $(INCLUDE)/mysdl_animate.h $(INCLUDE)/mysdl_main.h
+mysdl_tilebg.o: mysdl_tilebg.c $(INCLUDE)/mysdl_tilebg.h $(INCLUDE)/mysdl_sprites.h $(INCLUDE)/mysdl_animate.h $(INCLUDE)/mysdl_main.h
+
+
+clean:
+	@echo clean ...
+	@rm -fr *.o $(OUTPUT)
+
+#-----------------------------------------------------------------------------------
+#Build Targets when not in root directory
+#-----------------------------------------------------------------------------------
+
+%.a:
+	@echo archiving library $(notdir $@)
+	@$(AR) -rcsv $@ $(OFILES)
+
