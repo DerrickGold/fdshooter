@@ -65,16 +65,20 @@ static int bulletCollision(Bullet *b, Level *lvl) {
 
 
 int Player_Handler(Player *player, Level *lvl) {
-	int right = GlobalKeyState[SDL_SCANCODE_RIGHT];
-	int left = GlobalKeyState[SDL_SCANCODE_LEFT];
+	int right = (GlobalKeyState[SDL_SCANCODE_RIGHT] > 0);
+	int left = (GlobalKeyState[SDL_SCANCODE_LEFT] > 0);
 
-	player->x += (right - left) * (player->speed * DeltaTime);
+
+	player->x += ((right - left) * player->speed * DeltaTime);
 	if (right || left)
 		player->direction = (right > 0) ? DIRECTION_RIGHT : DIRECTION_LEFT;
 
-	player->y += player->yVel;
-	if (player->yVel < MAX_FALL_VELOCITY)
-		player->yVel += GRAVITY * DeltaTime;
+
+	player->y += player->yVel * DeltaTime;
+	//if (player->yVel < MAX_FALL_VELOCITY)
+
+		player->yVel += (GRAVITY * DeltaTime);
+
 
 	if (GlobalKeyState[SDL_SCANCODE_Z]) {
 		player->lastShot -= DeltaTime;
@@ -113,8 +117,8 @@ int Player_Handler(Player *player, Level *lvl) {
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		Bullet *b = &player->bullets[i];
 		if (!b->alive) continue;
-		b->x += b->xVel;
-		b->y += b->yVel;
+		b->x += b->xVel * DeltaTime;
+		b->y += b->yVel * DeltaTime;
 
 		int width = MYSDL_Sprite_getRenderWd(&b->gfx);
 		int height = MYSDL_Sprite_getRenderHt(&b->gfx);

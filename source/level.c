@@ -65,7 +65,7 @@ void Level_UpdatePlatforms(Level *lvl) {
 				shiftUp = 1;
 			}
 
-			curRow->ypos -= lvl->speed;
+			curRow->ypos -= lvl->speed * DeltaTime;
 			if (!lastRow || curRow->ypos > lastRow->ypos)
 				lastRow = curRow;
 
@@ -106,11 +106,10 @@ void Level_UpdateEnemies(Level *lvl) {
 			MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &e->gfx, e->x, e->y);
 		}
 		else {
-			if (doSpawn * DeltaTime < 5000) {
+			if (doSpawn < 50) {
 				continue;
 			}
 			doSpawn = 0;
-			printf("SPAWNING\n");
 			//spawn an enemy
 			int type = rand() % ENEMIES_PER_LEVEL;
 			memcpy(e, &lvl->enemy_template[type], sizeof(Enemy));
@@ -127,7 +126,7 @@ PlatCollision Level_GetPlatformTile(Level *lvl, float xpos, float ypos, int wd, 
 
 	for (int i = 0; i < MAX_TILE_ROWS; i++) {
 		TileRow *curRow = &lvl->rows[i];
-		if (ypos < curRow->ypos) {
+		if (ypos + ht < curRow->ypos + TILE_HEIGHT) {
 
 			float diff = (ypos + ht) - curRow->ypos;
 			if (diff < 0 || diff >(ht >> 1)) break;

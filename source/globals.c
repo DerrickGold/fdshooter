@@ -28,11 +28,9 @@ Level GlobalLevels[LVL_COUNT] = {
 
 void Global_Update(void) {
   GlobalKeyState = SDL_GetKeyboardState(NULL);
-  unsigned int curTicks = SDL_GetTicks();
-  if(curTicks > oldTicks) {
-    DeltaTime = (double)(curTicks - oldTicks)/targetFPS;
-    oldTicks = curTicks;
-  }
+  DeltaTime = (double)(SDL_GetTicks() - oldTicks)/TICKS_PER_SECOND;
+  oldTicks = SDL_GetTicks();
+ 
 }
 
 int box_collision(MYSDL_Sprite *s1, MYSDL_Sprite *s2) {

@@ -2,8 +2,8 @@
 #include <math.h>
 #include "globals.h"
 
-#define FLYSPEED 8.0f
-#define DECELSPEED 0.1f
+#define FLYSPEED 120.0f
+#define DECELSPEED 5.0f
 
 SDL_Event GlobalEvents;
 
@@ -26,12 +26,12 @@ void initData(void) {
 
 int flyingTrajectory(struct Enemy *e, void *level) {
 
-	e->angle += e->angleDir;
+	e->angle += e->speed * e->angleDir * DeltaTime;
 	if (e->properties & ENEMY_PROP_HIT_LEFTSCREEN || e->properties & ENEMY_PROP_HIT_RIGHTSCREEN ||
 		e->properties & ENEMY_PROP_HIT_TOPSCREEN || e->properties & ENEMY_PROP_HIT_BOTSCREEN)
 	{
 		e->angleDir = -e->angleDir;
-		e->angle += 180;
+		e->angle += 90;
 	}
 
 
@@ -151,8 +151,8 @@ int main(int argc, char *argv[]) {
             }
         }
 
-        Global_Update();
         MYSDL_clearRenderer(MYSDL_getMainRenderer());
+		Global_Update();
 		RunLevel(&GlobalLevels[0]);
         MYSDL_renderPresent(MYSDL_getMainRenderer());
     }

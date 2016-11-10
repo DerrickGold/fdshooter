@@ -15,6 +15,7 @@
 #include "mysdl_animate.h"
 #include "mysdl_tilebg.h"
 
+#define TICKS_PER_SECOND 1000.0f
 
 #define RESOURCE_DIR "./GameResources"
 
@@ -59,7 +60,8 @@
 #define BASE_DAMAGE 1
 
 #define MAX_BULLETS 10
-#define BULLET_SPEED 20.0f
+//bullet should take 2 seconds to cross the screen
+#define BULLET_SPEED (INTERNAL_RES_X / 2)
 
 #define MAX_ENEMIES 30
 
@@ -67,14 +69,17 @@
 #define MAX_GAP_COUNT 3
 #define MIN_GAP_SIZE 3
 #define MAX_DIFFICULTY 1.0f
-#define BASE_SCROLL_SPEED 0.8f
-#define BASE_PLAYER_SPEED 15.0f
+#define BASE_SCROLL_SPEED 50.0f
+//should take player 4 seconds to go from one end of the screen to the other
+#define BASE_PLAYER_SPEED (INTERNAL_RES_X / 3)
 #define PLAYER_SPRITE_FILE RESOURCE_DIR"/player.png"
 #define OBJECTS_SPRITE_FILE RESOURCE_DIR"/items.png"
 
-#define GRAVITY 1.5f
-#define JUMP_POWER 10.0f
-#define MAX_FALL_VELOCITY 15.0f
+#define GRAVITY 1800.f
+#define JUMP_POWER 700.f
+//from the top of the screen, it should take X seconds to freefall at 
+//maximum velocity
+#define MAX_FALL_VELOCITY (INTERNAL_RES_Y/2.5f)
 
 #define MAX_PLAYERS 2
 
