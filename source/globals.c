@@ -9,7 +9,6 @@ Player GlobalPlayers[MAX_PLAYERS];
 
 //private values for updating DeltaTime
 static unsigned int oldTicks = 0;
-static unsigned int targetFPS = 60;
 
 
 Level GlobalLevels[LVL_COUNT] = {
@@ -17,7 +16,7 @@ Level GlobalLevels[LVL_COUNT] = {
     .backdrop_p = RESOURCE_DIR"/bg1.bmp",
     .tiles_p = RESOURCE_DIR"/tiles1.png",
     .enemies_p = PLAYER_SPRITE_FILE,
-    .enemy_types = {22, 22, 22, 22, 22},
+    .enemy_types = {22, 47, 22, 47, 22},
     .boss_p = RESOURCE_DIR"/boss1.bmp",
     .music_p = RESOURCE_DIR"/music1.wav",
   },
@@ -30,7 +29,6 @@ void Global_Update(void) {
   GlobalKeyState = SDL_GetKeyboardState(NULL);
   DeltaTime = (double)(SDL_GetTicks() - oldTicks)/TICKS_PER_SECOND;
   oldTicks = SDL_GetTicks();
- 
 }
 
 int box_collision(MYSDL_Sprite *s1, MYSDL_Sprite *s2) {

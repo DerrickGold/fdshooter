@@ -11,6 +11,8 @@ int Player_Load(Player players[MAX_PLAYERS]) {
 		players[i].y = 0;
 		players[i].speed = BASE_PLAYER_SPEED;
 		players[i].lastShot = SHOT_TIMER;
+		players[i].health = PLAYER_BASE_HEALTH;
+		players[i].attackPwr = PLAYER_BASE_ATTACKPWR;
 		MYSDL_Sprite_load(&players[i].gfx, MYSDL_getMainRenderer(), PLAYER_SPRITE_FILE);
 		MYSDL_Sprite_setSourceFrame(&players[i].gfx, 0, 0, 16, 16);
 
@@ -46,6 +48,7 @@ static void shoot(Player *player) {
 
 		b->yVel = 0;
 		b->alive = 1;
+		b->attackPwr = player->attackPwr;
 		return;
 	}
 }
@@ -53,13 +56,62 @@ static void shoot(Player *player) {
 static int bulletCollision(Bullet *b, Level *lvl) {
 	for (int i = 0; i < MAX_ENEMIES; i++) {
 		Enemy *e = &lvl->enemies[i];
-		if (e->health <= 0) continue;
+		if (e->state != ENEMY_STATE_ACTIVE) continue;
 		if (box_collision(&b->gfx, &e->gfx)) {
 			b->alive = 0;
-			e->state = ENEMY_STATE_DEATH;
+			//e->state = ENEMY_STATE_DEATH;
+			Enemy_AttackFor(e, b->attackPwr);
 			break;
 		}
 	}
+	return 0;
+}
+
+static void playerDeath(Player *player) {
+	printf("Player is now dead!\n");
+	player->health = PLAYER_BASE_HEALTH;
+}
+
+
+static void playerHit(Player *player, float damage) {
+	printf("Player invulnerable!\n");
+	player->health -= damage;
+	if (player->health <= 0) 
+		playerDeath(player);
+}
+
+static void resetPlayerHit(Player *player) {
+	printf("player now vulnerable\n");
+}
+
+static void playerUpdateHitTimer(Player *player) {
+	if (player->hitTimer > 0) {
+		player->hitTimer -= DeltaTime;
+		if (player->hitTimer <= 0) {
+			resetPlayerHit(player);
+			player->hitTimer = 0;
+		}
+	}
+}
+
+static void playerEnemyCollision(Player *player, Level *lvl) {
+	if (player->hitTimer > 0) return;
+
+	for (int i = 0; i < MAX_ENEMIES; i++) {
+		Enemy *e = &lvl->enemies[i];
+		if (e->state != ENEMY_STATE_ACTIVE) continue;
+		if (box_collision(&player->gfx, &e->gfx)) {
+			Player_AttackFor(player, e->damage);
+			break;
+		}
+	}
+}
+
+int Player_AttackFor(Player *player, float damage) {
+	if (player->hitTimer > 0) return 0;
+
+	player->hitTimer = HIT_TIMEOUT;
+	playerHit(player, damage);
 	return 0;
 }
 
@@ -129,6 +181,9 @@ int Player_Handler(Player *player, Level *lvl) {
 		bulletCollision(b, lvl);
 		MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &b->gfx, b->x, b->y);
 	}
+
+	playerUpdateHitTimer(player);
+	playerEnemyCollision(player, lvl);
 
 	MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &player->gfx, player->x, player->y);
 	return 0;

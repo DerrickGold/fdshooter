@@ -87,36 +87,30 @@ void Level_UpdatePlatforms(Level *lvl) {
 void Level_DrawPlatforms(Level *lvl) {
 	for (int i = 0; i < MAX_TILE_ROWS; i++) {
 		TileRow *curRow = &lvl->rows[i];
-		if (curRow->alive) {
-			for (int x = 0; x < TILES_PER_ROW; x++) {
-				if (curRow->tiles[x] != TILE_NONE)
-					MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &lvl->tiles, TILE_WIDTH * x, curRow->ypos);
-			}
+		if (!curRow->alive) continue;
+
+		for (int x = 0; x < TILES_PER_ROW; x++) {
+			if (curRow->tiles[x] <= TILE_NONE) continue;
+			MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &lvl->tiles, TILE_WIDTH * x, curRow->ypos);
 		}
 	}
 }
 
 void Level_UpdateEnemies(Level *lvl) {
-	int doSpawn = rand() % 100000;
+	lvl->spawnTimer += DeltaTime;
+	if (lvl->spawnTimer >= BASE_SPAWN_TIMER) {
+		printf("Spawn timer click!\n");
+		lvl->spawnTimer = 0;
+		int type = rand() % ENEMIES_PER_LEVEL;
+		Enemy_Spawn(type, lvl->enemy_template, lvl->enemies);
+	}
+
 	for (int i = 0; i < MAX_ENEMIES; i++) {
 		Enemy *e = &lvl->enemies[i];
-		if (e->state != ENEMY_STATE_NULL) {
-			//process an already active enemy
-			Enemy_StateMachine(e, (void *)lvl);
-			MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &e->gfx, e->x, e->y);
-		}
-		else {
-			if (doSpawn < 50) {
-				continue;
-			}
-			doSpawn = 0;
-			//spawn an enemy
-			int type = rand() % ENEMIES_PER_LEVEL;
-			memcpy(e, &lvl->enemy_template[type], sizeof(Enemy));
-			e->x = rand() % INTERNAL_RES_X;
-			e->y = rand() % INTERNAL_RES_Y;
-			e->state = ENEMY_STATE_SPAWN;
-		}
+		if (e->state == ENEMY_STATE_NULL) continue;
+
+		Enemy_StateMachine(e, (void *)lvl);
+		MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &e->gfx, e->x, e->y);
 	}
 }
 

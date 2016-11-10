@@ -26,6 +26,7 @@ typedef struct Level {
 	float scroll, speed;
 	unsigned int score;
 	float difficulty;
+	double spawnTimer;
 
 	Mix_Chunk *music;
 	MYSDL_Sprite bg;

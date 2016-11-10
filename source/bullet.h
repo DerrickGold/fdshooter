@@ -6,6 +6,7 @@ typedef struct Bullet {
 	MYSDL_Sprite gfx;
 	float x, y;
 	float xVel, yVel;
+	float attackPwr;
 } Bullet;
 
 #endif //__BULLET_H__

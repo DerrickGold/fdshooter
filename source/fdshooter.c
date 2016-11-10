@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 #include "globals.h"
 
 #define FLYSPEED 120.0f
@@ -7,24 +8,23 @@
 
 SDL_Event GlobalEvents;
 
-int flyingTrajectory(struct Enemy *e, void *level);
-
-void initData(void) {
-
-  for (int i = 0; i < ENEMIES_PER_LEVEL; i++)
-  GlobalLevels[0].enemy_template[i] = (Enemy) { 
-	.state = ENEMY_STATE_ACTIVE,
-	.health = 1,
-	.updateTradjectory = &flyingTrajectory,
-	.speed = FLYSPEED,
-	.properties = ENEMY_PROP_KEEPONSCREEN,
-	.angleDir = 1.0
-  };
+int flyingSpawn(struct Enemy *e, void *level) {
+	e->x = rand() % INTERNAL_RES_X;
+	e->y = rand() % INTERNAL_RES_Y;
+	return 0;
 }
 
 
-
 int flyingTrajectory(struct Enemy *e, void *level) {
+
+	e->timer += DeltaTime;
+	//every 2 seconds, switch things up
+	if (e->timer >= 2.0f) {
+		e->timer = 0;
+		e->angle = rand() % 360;
+		//e->speed = (rand() % (int)FLYSPEED) + (FLYSPEED / 2);
+	}
+	//float vel = sin(DEG_TO_RAD(e->angle)) * (e->speed * DeltaTime);
 
 	e->angle += e->speed * e->angleDir * DeltaTime;
 	if (e->properties & ENEMY_PROP_HIT_LEFTSCREEN || e->properties & ENEMY_PROP_HIT_RIGHTSCREEN ||
@@ -41,7 +41,47 @@ int flyingTrajectory(struct Enemy *e, void *level) {
 	return 0;
 }
 
+int walkingSpawn(struct Enemy *e, void *level) {
+	e->x = rand() % INTERNAL_RES_X;
+	e->y = (rand() % 2) ? -MYSDL_Sprite_getRenderHt(&e->gfx) : INTERNAL_RES_Y;
+	return 0;
+}
 
+int walkingTrajectory(struct Enemy *e, void *level) {
+	
+	if (e->properties & ENEMY_PROP_HIT_LEFTSCREEN || e->properties & ENEMY_PROP_HIT_RIGHTSCREEN){
+		e->angleDir = -e->angleDir;
+	}
+	e->xVel = e->angleDir;
+	return 0;
+}
+
+void initData(void) {
+
+	for (int i = 0; i < ENEMIES_PER_LEVEL; i+=2)
+		GlobalLevels[0].enemy_template[i] = (Enemy) {
+		.state = ENEMY_STATE_ACTIVE,
+			.health = 1.0f,
+			.spawn = &flyingSpawn,
+			.updateTradjectory = &flyingTrajectory,
+			.speed = FLYSPEED,
+			.properties = ENEMY_PROP_KEEPONSCREEN,
+			.angleDir = 1.0,
+			.damage = 0.5f
+	};
+
+	for (int i = 1; i < ENEMIES_PER_LEVEL; i += 2)
+		GlobalLevels[0].enemy_template[i] = (Enemy) {
+		.state = ENEMY_STATE_ACTIVE,
+			.health = 1.0f,
+			.spawn = &walkingSpawn,
+			.updateTradjectory = &walkingTrajectory,
+			.speed = FLYSPEED,
+			.properties = ENEMY_PROP_KEEPONSCREEN | ENEMY_PROP_USEGRAVITY,
+			.angleDir = 1.0,
+			.damage = 0.5f
+	};
+}
 
 int StartLevel(Level *lvl) {
 	Level_Load(lvl);
@@ -121,6 +161,8 @@ void spawn_sprite(int spriteNum){
 }
 */
 int main(int argc, char *argv[]) {
+	srand(time(NULL));
+
     if(MYSDL_init(TARGET_RES_X, TARGET_RES_Y, 1)) {
         printf("Error init lib\n");
         return 0;

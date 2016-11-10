@@ -22,19 +22,22 @@ typedef enum {
 } ENEMY_STATE;
 
 typedef struct Enemy {
-	int id, health, damage;
+	int id;
+	float health, damage;
 	float x, y;
 	float xVel, yVel;
-	float speed;
-	float deceleration;
-	float angle;
-	float angleDir;
+	float speed, deceleration;
+	float angle, angleDir;
+	float timer, hitTimer;
 	MYSDL_Sprite gfx;
 	ENEMY_PROPS properties;
 	ENEMY_STATE state;
+	int(*spawn) (struct Enemy *, void *);
 	int(*updateTradjectory) (struct Enemy *, void *);
 	int(*attack) (struct Enemy *, void *);
 } Enemy;
 
+int Enemy_AttackFor(Enemy *e, float damage);
+int Enemy_Spawn(int type, Enemy templates[ENEMIES_PER_LEVEL], Enemy levelSlots[MAX_ENEMIES]);
 int Enemy_StateMachine(Enemy *e, void *level);
 #endif //__ENEMEY_H__

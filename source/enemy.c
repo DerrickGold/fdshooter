@@ -8,16 +8,18 @@ static float leftScreenDetect(Enemy *e) {
 }
 
 static float rightScreenDetect(Enemy *e) {
-	 return (e->x + MYSDL_Sprite_getRenderWd(&e->gfx)) - INTERNAL_RES_X;
+	return (e->x + MYSDL_Sprite_getRenderWd(&e->gfx)) - INTERNAL_RES_X;
 }
 
 static float topScreenDetect(Enemy *e) {
-	if (e->y < 0) return e->y;
+	int pos = e->y + MYSDL_Sprite_getRenderHt(&e->gfx);
+	if (pos < 0) return pos;
 	return 0;
 }
 
 static float bottomScreenDetect(Enemy *e) {
-	return (e->y + MYSDL_Sprite_getRenderHt(&e->gfx)) - INTERNAL_RES_Y;
+	int ht = MYSDL_Sprite_getRenderHt(&e->gfx);
+	return (e->y + ht) - (INTERNAL_RES_Y + ht);
 }
 
 static PlatCollision detectGround(Level *lvl, Enemy *e, float xTileOff, float yTileOff) {
@@ -27,9 +29,9 @@ static PlatCollision detectGround(Level *lvl, Enemy *e, float xTileOff, float yT
 }
 
 static void applyGravity(Level *lvl, Enemy *e) {
-	e->y += e->yVel;
-	if (e->yVel < MAX_FALL_VELOCITY)
-		e->yVel += GRAVITY * DeltaTime;
+	e->y += e->yVel * DeltaTime;
+	//if (e->yVel < MAX_FALL_VELOCITY)
+	e->yVel += GRAVITY * DeltaTime;
 
 	PlatCollision collision = detectGround(lvl, e, 0, 0);
 	if (collision.tile > TILE_NONE) {
@@ -38,6 +40,13 @@ static void applyGravity(Level *lvl, Enemy *e) {
 			e->y -= collision.yOffset;
 		}
 		e->properties |= ENEMY_PROP_GROUNDED;
+	}
+
+
+	if (e->y > INTERNAL_RES_Y) {
+		float offset = e->y  - INTERNAL_RES_Y;
+		e->y -= offset;
+		e->yVel = 0;
 	}
 }
 
@@ -50,6 +59,51 @@ static void clearProps(Enemy *e) {
 	e->properties = oldProperties;
 }
 
+static void enemyHit(Enemy *e, float damage) {
+	printf("Enemy invulnerable!\n");
+	e->health -= damage;
+	if (e->health <= 0) 
+		e->state = ENEMY_STATE_DEATH;
+}
+
+static void resetEnemyHit(Enemy *e) {
+	printf("Enemy vulnerable!\n");
+}
+
+static void updateHitTimer(Enemy *e) {
+	if (e->hitTimer > 0) {
+		e->hitTimer -= DeltaTime;
+		if (e->hitTimer <= 0) {
+			e->hitTimer = 0;
+			resetEnemyHit(e);
+		}
+	}
+}
+
+int Enemy_AttackFor(Enemy *e, float damage) {
+	if (e->hitTimer > 0) return 0;
+
+	e->hitTimer = ENEMY_HIT_TIMEOUT;
+	enemyHit(e, damage);
+	return 0;
+}
+
+int Enemy_Spawn(int type, Enemy templates[ENEMIES_PER_LEVEL], Enemy levelSlots[MAX_ENEMIES]) {
+	if (type >= ENEMIES_PER_LEVEL) return -1;
+
+	for (int i = 0; i < MAX_ENEMIES; i++) {
+		//find an open slot
+		Enemy *e = &levelSlots[i];
+		if (e->state == ENEMY_STATE_NULL) {
+			memcpy(e, &templates[type], sizeof(Enemy));
+			e->state = ENEMY_STATE_SPAWN;
+			printf("doin the spawn\n");
+			return 0;
+		}
+	}
+	printf("fucked the spawn\n");
+	return -1;
+}
 
 int Enemy_StateMachine(Enemy *e, void *level) {
 	Level *lvl = (Level *)level;
@@ -59,9 +113,11 @@ int Enemy_StateMachine(Enemy *e, void *level) {
 		break;
 	case ENEMY_STATE_SPAWN:
 		printf("Spawned new enemy\n");
+		if (e->spawn) e->spawn(e, level);
 		e->state = ENEMY_STATE_ACTIVE;
 		break;
 	case ENEMY_STATE_ACTIVE:
+		updateHitTimer(e);
 
 		//update x and y velocities
 		if (e->updateTradjectory) e->updateTradjectory(e, level);
@@ -77,9 +133,8 @@ int Enemy_StateMachine(Enemy *e, void *level) {
 
 		//update movement based on updated tradjectory
 		e->x += (e->xVel * e->speed) * DeltaTime;
-		e->y += (e->yVel * e->speed) * DeltaTime;
-
 		if (e->properties & ENEMY_PROP_USEGRAVITY) applyGravity(lvl, e);
+		else e->y += (e->yVel * e->speed) * DeltaTime;
 
 		if (e->properties & ENEMY_PROP_KEEPONSCREEN) {
 			//check left and right boundaries

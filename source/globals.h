@@ -85,7 +85,14 @@
 
 //limit to 2 shots per second
 #define SHOT_TIMER 2.5f
+#define BASE_SPAWN_TIMER 5.0f
 
+//when a player is hit, they are invulnerable for
+//HIT_TIMEOUT seconds to prevent repeating hits
+#define HIT_TIMEOUT 0.5f
+#define ENEMY_HIT_TIMEOUT 0.1f
+#define PLAYER_BASE_HEALTH 2.0f
+#define PLAYER_BASE_ATTACKPWR 0.5f
 
 #define CALC_ROW_GAP(diff) (((MAX_DIFFICULTY - diff) + 1.0f) * MIN_ROW_GAP)
 #define DEG_TO_RAD(deg) (deg * (PI / 180))
