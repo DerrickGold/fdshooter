@@ -7,14 +7,14 @@ PROJ_ROOT     := $(BASEDIR)/..
 SDL_BASE_DIR  := $(PROJ_ROOT)/SDL/windows
 
 
-GAMEDATA      := $(PROJ_ROOT)/GameResources
-CFLAGS        := -std=gnu99 -O3 -Wall 
-CC            := clang -arch x86_64
-LD            := $(CC)
-LDLIBS        := -lm -lobjc
-LDFLAGS       := -g 
+export GAMEDATA      := $(PROJ_ROOT)/GameResources
+export CFLAGS        := -std=gnu99 -O3 -Wall 
+export CC            := clang -arch x86_64
+export LD            := $(CC)
+export LDLIBS        := -lm -lobjc
+export LDFLAGS       := -g 
 
-OUTPUT        :=  $(PROJ_ROOT)/macosbuild
+export OUTPUT        :=  $(PROJ_ROOT)/macosbuild
 
 #=================================================================
 # Include the required libraries
