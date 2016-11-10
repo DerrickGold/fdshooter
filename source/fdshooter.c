@@ -7,62 +7,38 @@
 
 SDL_Event GlobalEvents;
 
-int flyingMovement(struct Enemy *e, void *whatever);
+int flyingTrajectory(struct Enemy *e, void *level);
 
 void initData(void) {
 
   for (int i = 0; i < ENEMIES_PER_LEVEL; i++)
-  GlobalLevels[0].enemy_template[i] = 
-    (Enemy) { .health = 1, .movement=&flyingMovement, .speed=FLYSPEED, .deceleration = DECELSPEED };
+  GlobalLevels[0].enemy_template[i] = (Enemy) { 
+	.state = ENEMY_STATE_ACTIVE,
+	.health = 1,
+	.updateTradjectory = &flyingTrajectory,
+	.speed = FLYSPEED,
+	.properties = ENEMY_PROP_KEEPONSCREEN,
+	.angleDir = 1.0
+  };
 }
 
 
 
-int flyingMovement(struct Enemy *e, void *whatever) {
-  int wd = MYSDL_Sprite_getRenderWd(&e->gfx);
-  int ht = MYSDL_Sprite_getRenderHt(&e->gfx);
-  switch(e->state) {
-    //pick a direction
-  case 0: {
-    int deg = rand() % 360;
-    e->xVel = cos(DEG_TO_RAD(deg));
-    e->yVel = sin(DEG_TO_RAD(deg));
-    e->state++;
-  } break;
+int flyingTrajectory(struct Enemy *e, void *level) {
 
-    //general movement
-  case 1:
-    e->x += (e->xVel * e->speed) * DeltaTime;
-    e->y += (e->yVel * e->speed) * DeltaTime;
-    if (e->x - wd <= 0)
-      e->state = 3;
-    else if  (e->x + (wd << 1) > INTERNAL_RES_X)
-      e->state = 4;
-    else if (e->y - ht < 0)
-      e->state = 5;
-    else if (e->y + (ht << 1) > INTERNAL_RES_Y)
-      e->state = 6;
-    break;
-    //turn around x
-  case 3:
-    e->xVel += e->speed * e->deceleration * DeltaTime;
-    e->state = 1;
-    break;
-  case 4:
-    e->xVel -= e->speed * e->deceleration * DeltaTime;
-    e->state = 1;
-    break;
-    //turn around y
-  case 5:
-    e->yVel += e->speed * e->deceleration * DeltaTime;
-    e->state = 1;
-    break;
-  case 6:
-    e->yVel -= e->speed *e ->deceleration * DeltaTime;
-    e->state = 1;
-    break;    
-  }
-  return 0;
+	e->angle += e->angleDir;
+	if (e->properties & ENEMY_PROP_HIT_LEFTSCREEN || e->properties & ENEMY_PROP_HIT_RIGHTSCREEN ||
+		e->properties & ENEMY_PROP_HIT_TOPSCREEN || e->properties & ENEMY_PROP_HIT_BOTSCREEN)
+	{
+		e->angleDir = -e->angleDir;
+		e->angle += 180;
+	}
+
+
+    e->xVel = cos(DEG_TO_RAD(e->angle));
+    e->yVel = sin(DEG_TO_RAD(e->angle));
+
+	return 0;
 }
 
 

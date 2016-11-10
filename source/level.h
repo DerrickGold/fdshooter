@@ -4,6 +4,7 @@
 #include "enemy.h"
 
 typedef enum {
+	TILE_NULL,
 	TILE_NONE,
 	TILE_TYPE1,
 } TILE_DATA;
@@ -37,9 +38,16 @@ typedef struct Level {
 } Level;
 
 
+typedef struct PlatCollision {
+	TILE_DATA tile;
+	float yOffset;
+	float xOffset;
+} PlatCollision;
+
 int Level_Load(Level *lvl);
 void Level_UpdatePlatforms(Level *lvl);
 void Level_DrawPlatforms(Level *lvl);
 void Level_UpdateEnemies(Level *lvl);
+PlatCollision Level_GetPlatformTile(Level *lvl, float xpos, float ypos, int wd, int ht);
 
 #endif //__LEVEL_H__

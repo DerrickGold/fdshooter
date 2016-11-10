@@ -56,7 +56,7 @@ static int bulletCollision(Bullet *b, Level *lvl) {
 		if (e->health <= 0) continue;
 		if (box_collision(&b->gfx, &e->gfx)) {
 			b->alive = 0;
-			e->health = 0;
+			e->state = ENEMY_STATE_DEATH;
 			break;
 		}
 	}
@@ -89,23 +89,13 @@ int Player_Handler(Player *player, Level *lvl) {
 	}
 
 
-	//check for platform collisions
-	int playerCenter = player->x + (MYSDL_Sprite_getRenderWd(&player->gfx) >> 1);
-	for (int i = 0; i < MAX_TILE_ROWS; i++) {
-		TileRow *curRow = &lvl->rows[i];
-		if (player->y < curRow->ypos) {
+	PlatCollision collision = Level_GetPlatformTile(lvl, player->x, player->y,
+		MYSDL_Sprite_getRenderWd(&player->gfx), MYSDL_Sprite_getRenderHt(&player->gfx));
 
-			float diff = (player->y + PLAYER_HEIGHT) - curRow->ypos;
-			if (diff < 0 || diff >(PLAYER_HEIGHT >> 1)) break;
-
-			int xpos = floor(playerCenter) / TILE_WIDTH;
-			if (curRow->tiles[xpos] != TILE_NONE) {
-				if (player->yVel > 0) {
-					player->yVel = 0;
-					player->y -= diff;
-				}
-			}
-			break;
+	if (collision.tile > TILE_NONE) {
+		if (player->yVel > 0) {
+			player->yVel = 0;
+			player->y -= collision.yOffset;
 		}
 	}
 

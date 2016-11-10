@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "globals.h"
+#include "enemy.h"
 
 static void generateTileRow(TileRow *row, int minGapSize) {
 	row->alive = 1;
@@ -99,9 +100,9 @@ void Level_UpdateEnemies(Level *lvl) {
 	int doSpawn = rand() % 100000;
 	for (int i = 0; i < MAX_ENEMIES; i++) {
 		Enemy *e = &lvl->enemies[i];
-		if (e->health > 0) {
+		if (e->state != ENEMY_STATE_NULL) {
 			//process an already active enemy
-			if (e->movement) e->movement(e, NULL);
+			Enemy_StateMachine(e, (void *)lvl);
 			MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &e->gfx, e->x, e->y);
 		}
 		else {
@@ -115,7 +116,28 @@ void Level_UpdateEnemies(Level *lvl) {
 			memcpy(e, &lvl->enemy_template[type], sizeof(Enemy));
 			e->x = rand() % INTERNAL_RES_X;
 			e->y = rand() % INTERNAL_RES_Y;
+			e->state = ENEMY_STATE_SPAWN;
 		}
 	}
+}
+
+PlatCollision Level_GetPlatformTile(Level *lvl, float xpos, float ypos, int wd, int ht) {
+	float xCenter = xpos + (wd >> 1);
+	PlatCollision col = { .tile = TILE_NULL, 0 };
+
+	for (int i = 0; i < MAX_TILE_ROWS; i++) {
+		TileRow *curRow = &lvl->rows[i];
+		if (ypos < curRow->ypos) {
+
+			float diff = (ypos + ht) - curRow->ypos;
+			if (diff < 0 || diff >(ht >> 1)) break;
+
+			int xpos = floor(xCenter) / TILE_WIDTH;
+			col.tile = curRow->tiles[xpos];
+			col.yOffset = diff;
+			return col;
+		}
+	}
+	return col;
 }
 
