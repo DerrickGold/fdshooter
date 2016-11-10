@@ -1,5 +1,7 @@
 SHELL		:= bash
 
+export BINNAME := fdshooter
+
 LIBDIR	:= MYSDLlib
 GAMEDIR := .
 MKFILE	:= Makefile

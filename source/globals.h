@@ -8,11 +8,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 
 #include "mysdl_main.h"
 #include "mysdl_sprites.h"
 #include "mysdl_animate.h"
 #include "mysdl_tilebg.h"
+
 
 #define RESOURCE_DIR "./GameResources"
 
@@ -83,74 +85,13 @@
 #define CALC_ROW_GAP(diff) (((MAX_DIFFICULTY - diff) + 1.0f) * MIN_ROW_GAP)
 #define DEG_TO_RAD(deg) (deg * (PI / 180))
 
-
-typedef enum {
-  TILE_NONE,
-  TILE_TYPE1,
-} TILE_DATA;
-
-typedef struct Bullet {
-  char alive;
-  MYSDL_Sprite gfx;
-  float x, y;
-  float xVel, yVel;
-} Bullet;
+#include "level.h"
+#include "enemy.h"
+#include "bullet.h"
+#include "player.h"
 
 
-typedef struct Player {
-  int id;
-  int health, bonus;
-  float speed;
-  float yVel;
-  float x, y;
-  char inAir;
-  char direction;
-  char shooting;
-  MYSDL_Sprite gfx;
-  double lastShot;
-  Bullet bullets[MAX_BULLETS];
-} Player;
 
-typedef struct Enemy {
-  int id, health, damage, state;
-  float x, y;
-  float xVel, yVel;
-  float speed;
-  float deceleration;
-  MYSDL_Sprite gfx;
-  int (*movement) (struct Enemy *, void *);
-  int (*attack) (struct Enemy *, void *);
-} Enemy;
-
-
-typedef struct TileRow {
-  char alive;
-  float ypos;
-  TILE_DATA tiles[TILES_PER_ROW];
-} TileRow;
-
-
-typedef struct Level {
-  char *backdrop_p;
-  char *tiles_p;
-  char *enemies_p;
-  int enemy_types[ENEMIES_PER_LEVEL];
-  char *boss_p;
-  char *music_p;
-
-  float scroll, speed;
-  unsigned int score;
-  float difficulty;
-
-  Mix_Chunk *music;
-  MYSDL_Sprite bg;
-  MYSDL_Sprite tiles;
-  Enemy enemy_template[ENEMIES_PER_LEVEL];
-  Enemy boss;
-
-  TileRow rows[MAX_TILE_ROWS];
-  Enemy enemies[MAX_ENEMIES];
-} Level;
 
 extern double DeltaTime;
 extern Uint8 *GlobalKeyState;
@@ -158,6 +99,6 @@ extern Player GlobalPlayers[MAX_PLAYERS];
 extern Level GlobalLevels[LVL_COUNT];
 extern int NumPlayers;
 
-extern int box_collision(MYSDL_Sprite *s1, MYSDL_Sprite *s2);
-extern void Global_Update(void);
+int box_collision(MYSDL_Sprite *s1, MYSDL_Sprite *s2);
+void Global_Update(void);
 #endif //__GLOBALS_H__

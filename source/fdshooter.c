@@ -67,276 +67,25 @@ int flyingMovement(struct Enemy *e, void *whatever) {
 
 
 
-int loadPlayer(Player players[MAX_PLAYERS]) {
-  for (int i = 0; i < MAX_PLAYERS; i++) {
-    memset(&players[i], 0, sizeof(Player));
-    players[i].id = i;
-    players[i].x = 0;
-    players[i].y = 0;
-    players[i].speed = BASE_PLAYER_SPEED;
-    players[i].lastShot = SHOT_TIMER;
-    MYSDL_Sprite_load(&players[i].gfx, MYSDL_getMainRenderer(), PLAYER_SPRITE_FILE);
-    MYSDL_Sprite_setSourceFrame(&players[i].gfx, 0, 0, 16, 16);
-
-    for (int x = 0; x < MAX_BULLETS; x++) {
-      Bullet *b = &players[i].bullets[x];
-      MYSDL_Sprite_load(&b->gfx, MYSDL_getMainRenderer(), OBJECTS_SPRITE_FILE);
-      MYSDL_Sprite_setSourceFrame(&b->gfx, 0, 48, 16, 16);
-      MYSDL_Sprite_scaleTo(&b->gfx, BULLET_WIDTH, BULLET_HEIGHT);
-    }
-  }
-
-  MYSDL_Sprite_setSourceFrame(&players[0].gfx, 0, 16, 16, 16);
-  MYSDL_Sprite_setSourceFrame(&players[1].gfx, 0, 64, 16, 16);
-
-  for (int i = 0; i < MAX_PLAYERS; i++)
-    MYSDL_Sprite_scaleTo(&players[i].gfx, PLAYER_WIDTH, PLAYER_HEIGHT);
-  
-  return 0;
+int StartLevel(Level *lvl) {
+	Level_Load(lvl);
+	Mix_PlayChannel(-1, lvl->music, 0);
+	return 0;
 }
 
 
-int loadLevel(Level *lvl) {
-  //load the backdrop
-  MYSDL_Sprite_load(&lvl->bg, MYSDL_getMainRenderer(), lvl->backdrop_p);
-  MYSDL_Sprite_setSourceFrame(&lvl->bg, 0, 0, 256, 192);
-  MYSDL_Sprite_scaleTo(&lvl->bg, TARGET_RES_X, TARGET_RES_Y);
-
-  //load the tileset
-  MYSDL_Sprite_load(&lvl->tiles, MYSDL_getMainRenderer(), lvl->tiles_p);
-  MYSDL_Sprite_scaleTo(&lvl->tiles, TILE_WIDTH, TILE_HEIGHT);
-  //MYSDL_Sprite_setSourceFrame(&lvl->tiles, 0, 0, TILE_WIDTH, TILE_HEIGHT);
-
-  //load up the enemies
-  for (int i = 0; i < ENEMIES_PER_LEVEL; i++) {
-    Enemy *e = &lvl->enemy_template[i];
-    
-    MYSDL_Sprite_load(&e->gfx, MYSDL_getMainRenderer(), lvl->enemies_p);
-    int type = lvl->enemy_types[i];
-    MYSDL_Sprite_setSourceFrame(&e->gfx, 0, 16*type, 16, 16);
-    MYSDL_Sprite_scaleTo(&e->gfx, ENEMY_WIDTH, ENEMY_HEIGHT);
-  }
-
-  //load up the boss
-  //MYSDL_Sprite_load(&lvl->boss, MYSDL_getMainRenderer(), lvl->boss_p);
-  //MYSDL_Sprite_setSourceFrame(&lvl->boss, 0, 0, BOSS_WIDTH, BOSS_HEIGHT);
-
-  //load up the music for the level
-  lvl->music = Mix_LoadWAV(lvl->music_p);
-  lvl->speed = BASE_SCROLL_SPEED;
-  memset(&lvl->rows, 0, sizeof(lvl->rows));
-  return 0;
-}
-
-void generateTileRow(TileRow *row, int minGapSize) {
-  row->alive = 1;
-  row->ypos = INTERNAL_RES_Y + TILE_HEIGHT;
-  for (int i = 0; i < TILES_PER_ROW; i++)
-    row->tiles[i] = TILE_TYPE1;
-
-  int numGaps = (rand() % MAX_GAP_COUNT) + 1;
-  for (int z = 0; z < numGaps; z++) {
-    //add the gap in place
-    int gapPos = (rand() % (TILES_PER_ROW - minGapSize));
-    for (int i = gapPos; i < gapPos + minGapSize; i++)
-      row->tiles[i]= TILE_NONE;
-  }
-}
-
-
-void tileManager(Level *lvl) {
-  float gap = CALC_ROW_GAP(lvl->difficulty);
-  TileRow *lastRow = NULL, *freeRow = NULL;
-
-  int shiftUp = 0;
-  for (int i = 0; i < MAX_TILE_ROWS, freeRow == NULL; i++) {
-    TileRow *curRow = &lvl->rows[i];
-    if (curRow->alive) {
-      if (curRow->ypos <= -TILE_HEIGHT) {
-        curRow->alive = 0;
-        shiftUp = 1;
-      }
-      
-      curRow->ypos -= lvl->speed;
-      if (!lastRow || curRow->ypos > lastRow->ypos)
-        lastRow = curRow;
-
-      if (shiftUp && i > 0) {
-        memcpy(&lvl->rows[i - 1], curRow, sizeof(TileRow));
-        curRow->alive = 0;
-      }
-    } else
-      freeRow = curRow;
-    
-  }
-
-  if (!lastRow || (lastRow->ypos < INTERNAL_RES_Y - gap && freeRow))
-    generateTileRow(freeRow, MIN_GAP_SIZE);
-}
- 
-void enemyProcess(Level *lvl) {
-  int doSpawn = rand() % 100000;
-  for (int i = 0; i < MAX_ENEMIES; i++) {
-    Enemy *e = &lvl->enemies[i];
-    if (e->health > 0) {
-      //process an already active enemy
-      if (e->movement) e->movement(e, NULL);
-      MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &e->gfx, e->x, e->y);
-    } else {
-      if (doSpawn * DeltaTime < 5000) {
-        continue;
-      }
-      doSpawn = 0;
-      printf("SPAWNING\n");
-      //spawn an enemy
-      int type = rand() % ENEMIES_PER_LEVEL;
-      memcpy(e, &lvl->enemy_template[type], sizeof(Enemy));
-      e->x = rand() % INTERNAL_RES_X;
-      e->y = rand() % INTERNAL_RES_Y;
-    }
-  }
-}
-
-
-
- 
-void drawRows(Level *lvl) {
-  for (int i = 0; i < MAX_TILE_ROWS; i++) {
-    TileRow *curRow = &lvl->rows[i];
-    if (curRow->alive) {
-      for (int x = 0; x < TILES_PER_ROW; x++) {
-        if (curRow->tiles[x] != TILE_NONE) 
-          MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &lvl->tiles, TILE_WIDTH * x, curRow->ypos);
-      }
-    }
-  }
-}
-
-
-void playerShoot(Player *player) {
-  for (int i = 0; i < MAX_BULLETS; i++) {
-    Bullet *b = &player->bullets[i];
-    if (b->alive) continue;
-
-    b->x = player->x;
-    b->y = player->y;
-    if (player->direction == DIRECTION_LEFT)
-      b->xVel = -BULLET_SPEED;
-    else
-      b->xVel = BULLET_SPEED;
-
-    b->yVel = 0;
-    b->alive = 1;
-    return;
-  }
-}
-
-int bulletCollision(Bullet *b, Level *lvl) {
-  for (int i = 0; i < MAX_ENEMIES; i++) {
-    Enemy *e = &lvl->enemies[i];
-    if (e->health <= 0) continue;
-    if (box_collision(&b->gfx, &e->gfx)) {
-      b->alive = 0;
-      e->health = 0;
-      break;
-    }
-  }
-  return 0;
-}
-
-int playerHandler(Player *player, Level *lvl) {
-  int right = GlobalKeyState[SDL_SCANCODE_RIGHT];
-  int left = GlobalKeyState[SDL_SCANCODE_LEFT];
-
-  player->x += (right - left) * (player->speed * DeltaTime);
-  if (right || left)
-    player->direction = (right > 0) ? DIRECTION_RIGHT : DIRECTION_LEFT;
-  
-  player->y += player->yVel;
-  if (player->yVel < MAX_FALL_VELOCITY)
-    player->yVel += GRAVITY * DeltaTime;
-
-  if (GlobalKeyState[SDL_SCANCODE_Z]) {
-    player->lastShot -= DeltaTime;
-    if (!player->shooting || player->lastShot <= 0) {
-      playerShoot(player);
-      player->lastShot = SHOT_TIMER;
-      player->shooting = 1;
-    }
-  } else {
-    player->shooting = 0;
-  }
-  
-
-  //check for platform collisions
-  int playerCenter = player->x + (MYSDL_Sprite_getRenderWd(&player->gfx) >> 1);
-  for (int i = 0; i < MAX_TILE_ROWS; i++) {
-    TileRow *curRow = &lvl->rows[i];
-    if (player->y < curRow->ypos) {
-      
-      float diff = (player->y + PLAYER_HEIGHT) - curRow->ypos;
-      if (diff < 0 || diff > (PLAYER_HEIGHT >> 1)) break;
-
-      int xpos = floor(playerCenter) / TILE_WIDTH;
-      if (curRow->tiles[xpos] != TILE_NONE) {
-        if (player->yVel > 0) {
-          player->yVel = 0;
-          player->y -= diff;
-        }
-      }
-      break;
-    }
-  }
-  
-  if (player->y + PLAYER_HEIGHT > INTERNAL_RES_Y) {
-    float offset = (player->y + PLAYER_HEIGHT) - INTERNAL_RES_Y;
-    player->y -= offset;
-    player->yVel = 0;
-  }
-
-  player->inAir = player->yVel != 0.0;
-  if (!player->inAir && GlobalKeyState[SDL_SCANCODE_SPACE]) {
-    player->yVel = -JUMP_POWER;
-  }
-
-  for (int i = 0; i < MAX_BULLETS; i++) {
-    Bullet *b = &player->bullets[i];
-    if (!b->alive) continue;
-    b->x += b->xVel;
-    b->y += b->yVel;
-
-    int width = MYSDL_Sprite_getRenderWd(&b->gfx);
-    int height = MYSDL_Sprite_getRenderHt(&b->gfx);
-    if (b->x + width  < 0 || b->x >= INTERNAL_RES_X ||
-        b->y + height < 0 || b->y > INTERNAL_RES_Y) {
-      b->alive = 0;
-    }
-    bulletCollision(b, lvl);
-    MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &b->gfx, b->x, b->y);
-  }
-
-  MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &player->gfx, player->x, player->y);
-  return 0;
-}
-
-
-
-int renderLevel(Level *lvl) {
-
-  tileManager(lvl);
+int RunLevel(Level *lvl) {
+  Level_UpdatePlatforms(lvl);
   //render background
   MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &lvl->bg, 0, 0);
-  drawRows(lvl);
+  Level_DrawPlatforms(lvl);
   //render the player
   for (int p = 0; p < NumPlayers; p++)
-    playerHandler(&GlobalPlayers[p], lvl);
+	  Player_Handler(&GlobalPlayers[p], lvl);
 
-  enemyProcess(lvl);
+  Level_UpdateEnemies(lvl);
   return 0;
 }
-
-
-
 
 
 
@@ -404,12 +153,10 @@ int main(int argc, char *argv[]) {
     Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 4096 );
     initData();
     
-    loadPlayer(GlobalPlayers);
-    loadLevel(&GlobalLevels[0]);
-    Mix_PlayChannel( -1, GlobalLevels[0].music, 0 );
+	Player_Load(GlobalPlayers);
+	StartLevel(&GlobalLevels[0]);
 
     bool quit = false;
-
     while (!quit) {
         //Handle events on queue
         while( SDL_PollEvent(&GlobalEvents) != 0 ){
@@ -427,11 +174,10 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
+
         Global_Update();
         MYSDL_clearRenderer(MYSDL_getMainRenderer());
-        renderLevel(&GlobalLevels[0]);
-
-        //Get window surface
+		RunLevel(&GlobalLevels[0]);
         MYSDL_renderPresent(MYSDL_getMainRenderer());
     }
 

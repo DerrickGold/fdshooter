@@ -33,21 +33,14 @@ LDFLAGS       += $(LIB_PATHS) $(LDLIBS) $(FRAMEWORKS)
 #=================================================================
 .PHONY: all clean
 
-all: fdshooter
-
-fdshooter: fdshooter.o globals.o
+all: 
 	@echo "============================================================="
 	@echo "Gathering game dependencies and resources"
 	@echo "============================================================="
 	@[ -d $(OUTPUT) ] || mkdir -p $(OUTPUT)
 	cp -r $(GAMEDATA) $(OUTPUT)
-	@echo "============================================================="
-	@echo "Linking Binary...."
-	@echo "============================================================="
-	$(LD) $^ $(CFLAGS) $(LDFLAGS) -o $(OUTPUT)/$@
-
-fdshooter.o: fdshooter.c globals.h
-globals.o: globals.c globals.h
+	@#linking stage
+	$(MAKE) -f mk $(BINNAME)
 
 
 clean:

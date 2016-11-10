@@ -1,0 +1,12 @@
+#Add file rules here!
+
+$(BINNAME): fdshooter.o level.o globals.o player.o
+	@echo "============================================================="
+	@echo "Linking Binary...."
+	@echo "============================================================="
+	$(LD) $^ $(CFLAGS) $(LDFLAGS) -o $(OUTPUT)/$@
+	
+fdshooter.o: fdshooter.c enemy.h level.h enemy.h player.h bullet.h globals.h 
+globals.o: globals.c globals.h level.h enemy.h player.h bullet.h
+level.o: level.c level.h
+player.o: player.c player.h bullet.h enemy.h
