@@ -176,6 +176,12 @@ int main(int argc, char *argv[]) {
 	StartLevel(&GlobalLevels[0]);
 
     bool quit = false;
+	int curRes = 0;
+	int resolutions[3][2] = {
+		{1280, 720},
+		{1920, 1080},
+		{3840, 2160}
+	};
     while (!quit) {
         //Handle events on queue
         while( SDL_PollEvent(&GlobalEvents) != 0 ){
@@ -189,7 +195,15 @@ int main(int argc, char *argv[]) {
                 switch( GlobalEvents.key.keysym.sym ) {
                     case SDLK_ESCAPE:
                         quit++;
-                    break;
+						break;
+					case SDLK_f:
+						MYSDL_ToggleFullScreen();
+						break;	
+					case SDLK_g:
+						MYSDL_scaleRes(resolutions[curRes][0], resolutions[curRes][1]);
+						curRes++;
+						curRes %= 3;
+						break;
                 }
             }
         }

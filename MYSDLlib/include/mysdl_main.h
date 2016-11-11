@@ -43,4 +43,5 @@ extern void MYSDL_scaleRes(int x, int y);
 extern int MYSDL_init(int resx, int resy, char defWindow);
 extern void MYSDL_Quit();
 
+extern void MYSDL_ToggleFullScreen(void);
 #endif

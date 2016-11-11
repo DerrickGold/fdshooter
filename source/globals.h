@@ -27,13 +27,18 @@
 
 #define LVL_COUNT 2
 
-//target resolution to scale to
-#define TARGET_RES_X 1280
-#define TARGET_RES_Y 720
+//This resolution is the default that everything will be
+//scaled to. It should match the window resolution, and is
+//separate from the internal resolution.
+#define TARGET_RES_X 1920
+#define TARGET_RES_Y 1080
 
-//internal full screen resolution
-#define INTERNAL_RES_X 1280
-#define INTERNAL_RES_Y 720
+//Game logic will be based on this internal
+//resolution. This includes screen boundaries
+//and any speed calculations based on the boundaries.
+#define INTERNAL_RES_X 1920
+#define INTERNAL_RES_Y 1080
+
 
 #define DIRECTION_LEFT 0
 #define DIRECTION_RIGHT 1
@@ -59,6 +64,11 @@
 #define HEALTHBAR_HEIGHT 4
 #define HEALTHBAR_OFFSET 4
 
+#define PLAYER_HEALTHBAR_WIDTH 300
+#define PLAYER_HEALTHBAR_HEIGHT 24
+#define PLAYER_HEALTHBAR_X1 65
+#define PLAYER_HEALTHBAR_X2 (INTERNAL_RES_X - PLAYER_HEALTHBAR_WIDTH - PLAYER_HEALTHBAR_X1)
+#define PLAYER_HEALTHBAR_Y (INTERNAL_RES_Y - PLAYER_HEALTHBAR_HEIGHT - 30)
 
 //bosses are at least 2 times bigger than enemies
 #define BOSS_WIDTH (ENEMY_WIDTH<<1)

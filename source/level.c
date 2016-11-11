@@ -22,7 +22,7 @@ int Level_Load(Level *lvl) {
 	//load the backdrop
 	MYSDL_Sprite_load(&lvl->bg, MYSDL_getMainRenderer(), lvl->backdrop_p);
 	MYSDL_Sprite_setSourceFrame(&lvl->bg, 0, 0, 256, 192);
-	MYSDL_Sprite_scaleTo(&lvl->bg, TARGET_RES_X, TARGET_RES_Y);
+	MYSDL_Sprite_scaleTo(&lvl->bg, INTERNAL_RES_X, INTERNAL_RES_Y);
 
 	//load the tileset
 	MYSDL_Sprite_load(&lvl->tiles, MYSDL_getMainRenderer(), lvl->tiles_p);

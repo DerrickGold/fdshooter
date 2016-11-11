@@ -13,6 +13,7 @@ int Player_Load(Player players[MAX_PLAYERS]) {
 		players[i].lastShot = SHOT_TIMER;
 		players[i].health = PLAYER_BASE_HEALTH;
 		players[i].attackPwr = PLAYER_BASE_ATTACKPWR;
+		players[i].healthbar = HealthBar_Create(players[i].health , PLAYER_HEALTHBAR_WIDTH, PLAYER_HEALTHBAR_HEIGHT);
 		MYSDL_Sprite_load(&players[i].gfx, MYSDL_getMainRenderer(), PLAYER_SPRITE_FILE);
 		MYSDL_Sprite_setSourceFrame(&players[i].gfx, 0, 0, 16, 16);
 
@@ -185,6 +186,9 @@ int Player_Handler(Player *player, Level *lvl) {
 	playerUpdateHitTimer(player);
 	playerEnemyCollision(player, lvl);
 
+	float hbx = (player->id == 0) ? PLAYER_HEALTHBAR_X1 : PLAYER_HEALTHBAR_X2;
+	
+	HealthBar_Draw(&player->healthbar, player->health, hbx, PLAYER_HEALTHBAR_Y);
 	MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &player->gfx, player->x, player->y);
 	return 0;
 }

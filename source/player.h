@@ -3,6 +3,7 @@
 
 #include "globals.h"
 #include "bullet.h"
+#include "healthbar.h"
 
 typedef struct Player {
 	int id;
@@ -18,6 +19,8 @@ typedef struct Player {
 	MYSDL_Sprite gfx;
 	double lastShot;
 	Bullet bullets[MAX_BULLETS];
+
+	HealthBar healthbar;
 } Player;
 
 int Player_Load(Player players[MAX_PLAYERS]);

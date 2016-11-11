@@ -109,6 +109,13 @@ void MYSDL_scaleRes(int x, int y){
 
     printf("scale size: %f, %f\n", 1.0+ xSize, 1.0+ ySize);
     SDL_RenderSetScale(MYSDL_getSDLRenderer(mainRenderer), xSize, ySize);
+	SDL_SetWindowSize(MYSDL_getMainWindow(), x, y);
+}
+
+void MYSDL_ToggleFullScreen(void) {
+	static unsigned int status = 0;
+	status = (status == 0) ? SDL_WINDOW_FULLSCREEN : 0;
+	SDL_SetWindowFullscreen(MYSDL_getMainWindow(), status);
 }
 
 int MYSDL_init(int resx, int resy, char defWindow) {
