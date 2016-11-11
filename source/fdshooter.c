@@ -57,6 +57,7 @@ int walkingTrajectory(struct Enemy *e, void *level) {
 }
 
 void initData(void) {
+	HealthBar_Load();
 
 	for (int i = 0; i < ENEMIES_PER_LEVEL; i+=2)
 		GlobalLevels[0].enemy_template[i] = (Enemy) {

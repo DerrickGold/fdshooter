@@ -18,6 +18,10 @@
 #define TICKS_PER_SECOND 1000.0f
 
 #define RESOURCE_DIR "./GameResources"
+#define PLAYER_SPRITE_FILE RESOURCE_DIR"/player.png"
+#define OBJECTS_SPRITE_FILE RESOURCE_DIR"/items.png"
+#define HEALTHBAR_GFX RESOURCE_DIR"/healthbar.png"
+
 
 #define PI 3.14159265
 
@@ -51,6 +55,11 @@
 #define BULLET_WIDTH 16
 #define BULLET_HEIGHT 16
 
+#define HEALTHBAR_WIDTH 32
+#define HEALTHBAR_HEIGHT 4
+#define HEALTHBAR_OFFSET 4
+
+
 //bosses are at least 2 times bigger than enemies
 #define BOSS_WIDTH (ENEMY_WIDTH<<1)
 #define BOSS_HEIGHT (ENEMY_HEIGHT<<1)
@@ -72,8 +81,6 @@
 #define BASE_SCROLL_SPEED 50.0f
 //should take player 4 seconds to go from one end of the screen to the other
 #define BASE_PLAYER_SPEED (INTERNAL_RES_X / 3)
-#define PLAYER_SPRITE_FILE RESOURCE_DIR"/player.png"
-#define OBJECTS_SPRITE_FILE RESOURCE_DIR"/items.png"
 
 #define GRAVITY 1800.f
 #define JUMP_POWER 700.f
@@ -97,11 +104,14 @@
 #define CALC_ROW_GAP(diff) (((MAX_DIFFICULTY - diff) + 1.0f) * MIN_ROW_GAP)
 #define DEG_TO_RAD(deg) (deg * (PI / 180))
 
+
+
+
 #include "level.h"
 #include "enemy.h"
 #include "bullet.h"
 #include "player.h"
-
+#include "healthbar.h"
 
 
 

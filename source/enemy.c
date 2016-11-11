@@ -96,6 +96,7 @@ int Enemy_Spawn(int type, Enemy templates[ENEMIES_PER_LEVEL], Enemy levelSlots[M
 		Enemy *e = &levelSlots[i];
 		if (e->state == ENEMY_STATE_NULL) {
 			memcpy(e, &templates[type], sizeof(Enemy));
+			e->healthbar = HealthBar_Create(e->health, HEALTHBAR_WIDTH, HEALTHBAR_HEIGHT);
 			e->state = ENEMY_STATE_SPAWN;
 			printf("doin the spawn\n");
 			return 0;
@@ -104,6 +105,18 @@ int Enemy_Spawn(int type, Enemy templates[ENEMIES_PER_LEVEL], Enemy levelSlots[M
 	printf("fucked the spawn\n");
 	return -1;
 }
+
+void Enemy_Draw(Enemy *e) {
+	if (e->state == ENEMY_STATE_NULL) return;
+
+	int eWidth = MYSDL_Sprite_getRenderWd(&e->gfx);
+	float xCenter = (e->x + (eWidth / 2)) - (e->healthbar.width / 2);
+ 
+	HealthBar_Draw(&e->healthbar, e->health, xCenter, e->y - HEALTHBAR_OFFSET - e->healthbar.height);
+	MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &e->gfx, e->x, e->y);
+}
+
+
 
 int Enemy_StateMachine(Enemy *e, void *level) {
 	Level *lvl = (Level *)level;

@@ -2,6 +2,7 @@
 #define __ENEMEY_H__
 
 #include "globals.h"
+#include "healthbar.h"
 
 typedef enum {
 	ENEMY_PROP_KEEPONSCREEN = (1<<0),
@@ -30,6 +31,7 @@ typedef struct Enemy {
 	float angle, angleDir;
 	float timer, hitTimer;
 	MYSDL_Sprite gfx;
+	HealthBar healthbar;
 	ENEMY_PROPS properties;
 	ENEMY_STATE state;
 	int(*spawn) (struct Enemy *, void *);
@@ -40,4 +42,6 @@ typedef struct Enemy {
 int Enemy_AttackFor(Enemy *e, float damage);
 int Enemy_Spawn(int type, Enemy templates[ENEMIES_PER_LEVEL], Enemy levelSlots[MAX_ENEMIES]);
 int Enemy_StateMachine(Enemy *e, void *level);
+void Enemy_Draw(Enemy *e);
+
 #endif //__ENEMEY_H__

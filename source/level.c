@@ -110,7 +110,7 @@ void Level_UpdateEnemies(Level *lvl) {
 		if (e->state == ENEMY_STATE_NULL) continue;
 
 		Enemy_StateMachine(e, (void *)lvl);
-		MYSDL_Sprite_draw(MYSDL_getMainRenderer(), &e->gfx, e->x, e->y);
+		Enemy_Draw(e);
 	}
 }
 
